@@ -96,7 +96,7 @@ custom_scoring <- function(...){
   sr <- sr %>% discard(~ all(names(.) == "all_pos"))
 
   ap <- sr[intersect(names(sr), c("rec", "rush", "misc", "ret", "idp"))]%>%
-    imap(~ list(all_pos = !any(ffanalytics:::scoring_positions[[.y]] %in% names(.x))))
+    imap(~ list(all_pos = !any(FantasyFootball:::scoring_positions[[.y]] %in% names(.x))))
 
   sr %>% list_modify(!!! ap)
 }
