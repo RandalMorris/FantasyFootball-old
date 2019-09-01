@@ -1,4 +1,4 @@
-# ffanalytics
+# FantasyFootball
 
 This package allows users to scrape projected stats from several sites that have
 publicly available projections. Once data is scraped the user can then use functions
@@ -8,8 +8,8 @@ able to use the package if they familiarize themselves with the `tidyverse` way
 of creating code.
 
 ## Installation
-Intallation of the `ffanalytics` package can be done directly from github:
-`devtools::install_github("FantasyFootballAnalytics/ffanalytics")`
+Intallation of the `FantasyFootball` package can be done directly from github:
+`devtools::install_github("RandalMorris/FantasyFootball")`
 
 ## Projection sources
 The following sources are available for scraping:
