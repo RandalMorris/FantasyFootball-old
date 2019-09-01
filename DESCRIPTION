@@ -1,11 +1,11 @@
-Package: ffanalytics
+Package: FantasyFootball
 Type: Package
 Title: Scrape Data For Fantasy Football
-Version: 2.0.2.0000
-Authors@R: c(person("Dennis", "Andersen", email = "andersen.dennis@outlook.com",
+Version: 1.0.0.0000
+Authors@R: c(person("Randal", "Morris", email = "morrrand@gmail.com",
                   role = c("aut", "cre")))
-Author: Dennis Andersen
-Maintainer: Dennis Andersen <andersen.dennis@outlook.com>
+Author: Randal Morris
+Maintainer: Randal Morris <morrrand@gamil.com>
 Description: Scrapes data from multiple public sources of data and compiles into one dataset.
 License: GPL
 Encoding: UTF-8
@@ -32,5 +32,5 @@ Collate:
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/FantasyFootballAnalytics/ffanalytics
-BugReports: https://github.com/FantasyFootballAnalytics/ffanalytics/issues
+URL: https://github.com/RandalMorris/FantasyFootball
+BugReports: https://github.com/RandalMorris/FantasyFootball/issues
