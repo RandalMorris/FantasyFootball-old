@@ -648,9 +648,9 @@ xlsx_sites <- list(
   )
 )
 projection_sources <- append(append(
-  purrr::map(html_sites, do.call, what = ffanalytics:::html_source$new),
-  purrr::map(json_sites, do.call, what = ffanalytics:::json_source$new)),
-  purrr::map(xlsx_sites, do.call, what = ffanalytics:::xlsx_source$new)
+  purrr::map(html_sites, do.call, what = FantasyFootball:::html_source$new),
+  purrr::map(json_sites, do.call, what = FantasyFootball:::json_source$new)),
+  purrr::map(xlsx_sites, do.call, what = FantasyFootball:::xlsx_source$new)
 )
 
 
