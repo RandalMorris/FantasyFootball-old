@@ -17,7 +17,7 @@ Collate:
     'adp_functions.R'
     'calc_projections.R'
     'custom_scoring.R'
-    'ffanalytics.R'
+    'FantasyFootball.R'
     'helper_funcs.R'
     'impute_funcs.R'
     'make_scoring.R'
