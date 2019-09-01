@@ -28,7 +28,7 @@ pos_scor <- function(pname, rule_list){
 }
 
 grp_rule <- function(x, p){
-  sp <- ffanalytics:::scoring_positions[[p]]
+  sp <- FantasyFootball:::scoring_positions[[p]]
 
   map(x, ~ .x[intersect(names(.x), sp)]) %>% reduce(~ list_merge(.x,!!!.y)) %>%
     modify_depth(2, sum)
