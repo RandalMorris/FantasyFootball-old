@@ -31,11 +31,6 @@
     salary_table <- dplyr::select(player_dfs, id,name,team,position) %>%
       inner_join(salary_table, by = c("name"))
     names(salary_table)[3:4] <- c("team","position")
-    salary_table = subset(salary_table, select = -c(team.y, position.y))       
-
-    dfs_data <- dplyr::select(projections, id,name,team,position, avg_type, points, pos_rank, floor, ceiling, tier, risk) %>%
-      inner_join(salary_table, by = c("id"))
-    names(dfs_data)[2:4] <- c("name","team","position")
-    dfs_data = subset(dfs_data, select = -c(name.y,team.y, position.y))     
-    rm(salary_table,player_dfs)
+    player_dfs_table = subset(salary_table, select = -c(team.y, position.y))       
+    rm(player_dfs,salary_table)
 }
