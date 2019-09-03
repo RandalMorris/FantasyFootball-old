@@ -15,7 +15,7 @@
   
     salary_url <- paste("https://www.fantasypros.com/daily-fantasy/nfl/draftkings-salary-changes.php")
 
-    salary_table <-  salary_url %>%  rvest::read_html() %>% rvest::html_node("table") %>%
+    salary_table <-  salary_url %>%  read_html() %>% rvest::html_node("table") %>%
       rvest::html_table() %>%
       dplyr::select(Player, Salary = "This Week") %>%
       tidyr::extract(Player, c("Player", "Team", "Pos"),
