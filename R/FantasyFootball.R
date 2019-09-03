@@ -12,25 +12,4 @@
                   position = dplyr::recode(position, Def = "DST", PK = "K"),
                   age = as.integer(lubridate::year(Sys.time()) - lubridate::year(birthdate)),
                   exp = 2019 - as.integer(draft_year))
-  
-    salary_url <- paste("https://www.fantasypros.com/daily-fantasy/nfl/draftkings-salary-changes.php")
-
-    salary_table <-  salary_url %>%  read_html() %>% rvest::html_node("table") %>%
-      rvest::html_table() %>%
-      dplyr::select(Player, Salary = "This Week") %>%
-      tidyr::extract(Player, c("Player", "Team", "Pos"),
-      "(.+)\\s\\(([A-Z]+)\\s\\-\\s([A-Z]+)\\)$") %>%
-      dplyr::mutate(Salary = as.numeric(gsub("[\\$,]","", Salary)))
-    names(salary_table)[1:4] <- c("name","team","position","salary")
-
-    player_dfs <- player_table
-    player_dfs$first_name <- paste(player_dfs$first_name, player_dfs$last_name)
-    names(player_dfs)[3:5] <- c("name","team","position")
-    player_dfs = subset(player_dfs, select = c(id,name,team,position))
-
-    salary_table <- dplyr::select(player_dfs, id,name,team,position) %>%
-      inner_join(salary_table, by = c("name"))
-    names(salary_table)[3:4] <- c("team","position")
-    player_dfs_table = subset(salary_table, select = -c(team.y, position.y))       
-    rm(player_dfs,salary_table)
 }
