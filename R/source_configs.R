@@ -584,7 +584,7 @@ xlsx_sites <- list(
   ),
   #### FantasySharks ####
   FantasySharks = list(
-    base = "https://www.fantasysharks.com/apps/bert/forecasts/projections.php?csv=1&"
+    base = "https://www.fantasysharks.com/apps/bert/forecasts/projections.php?csv=1&",
     get_path = function(season, week, position)sprintf("fantasy%srankingsexcel.xlsx", as.character(season)),
     get_query = function(season, week, pos_id, ...){
       query <- list()
