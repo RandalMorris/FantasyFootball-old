@@ -16,7 +16,7 @@ html_sites <- list(
     table_css = "table.TableBase-table",
     pid_css = "table.TableBase-table a[href *= 'players']",
     rm_elem = list("colgroup.TableBase-colGroup", "div.Tablebase-tooltip", "span.CellPlayerName--short",
-                  "tr.TableBase-headGroupTr","tr.TableBase-headTr"),
+                  "tr.TableBase-headGroupTr"),
     extract_pid = function(p_node){
       p_node %>% html_attr("href") %>% str_extract("[0-9]{2,8}")},
     split_cols = list(
