@@ -311,9 +311,7 @@ html_source <- R6::R6Class(
       table_data <- tibble()
 
       repeat{
-        download.file(src_session, destfile = "scrapedpage.html", quiet=TRUE)
-        data_page <- read_html("scrapedpage.html")
-        #data_page <- read_html(src_session)
+        data_page <- read_html(src_session)
 
         if(length(rm_elem) > 0){
           map(rm_elem, html_nodes, x = data_page) %>% map(xml_remove)
