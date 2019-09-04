@@ -204,6 +204,70 @@ html_sites <- list(
       dst_pts_allowed = "PA", dst_yds_allowed = "YDS AGN", site_pts = "FPTS",
       site_pts = "MISC FPTS")
   ),
+  #### FantasySharks ####
+  FantasySharks = list(
+    base = "https://www.fantasysharks.com/apps/bert/forecasts/projections.php",
+    get_query = function(season, week, pos_id, ...){
+      query <- list()
+      shark_segment <- function(season, week){
+        shark_season <- c("2017"= 586, "2018" = 618, "2019" = 650, "2020" = 682)
+        segment <- shark_season[as.character(season)] + week + 9 * (week > 0)
+        return(segment)
+      }
+      query[c("League", "scoring", "uid")] <- c(-1, 1, 4)
+      query$Segment <- shark_segment(season, week)
+      query$Position <- pos_id
+      return(query)
+    },
+    url_positions = function(p)switch(p, QB = 1, RB =2 , WR = 4, TE = 5, K = 7,
+                                      DST = 6, DL = 8, LB = 9, DB = 10),
+    min_week = 0,
+    max_week = 21,
+    season_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
+    week_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
+    id_col = "id",
+    table_css = "#toolData",
+    pid_css = "td.playerLink a",
+    rm_elem = list("tr.separator",
+                   "#toolData tr[valign ='middle']:not(:first-child)",
+                   "#toolData tr[height ='20px']"),
+    extract_pid = function(p_node){
+      p_node %>% html_attr("href") %>%
+        map(parse_url) %>% map_chr(`[[`, c("query", "id")) %>%
+        `names<-`(NULL) %>% str_pad(4, "left", "0")
+    },
+    stat_cols = c(
+      pass_att = "Att", pass_comp = "Comp", pass_yds = "Pass Yds", pass_tds = "Pass TDs",
+      pass_09_tds = "0-9 Pass TDs", pass_1019_tds = "10-19 Pass TDs",
+      pass_2029_tds = "20-29 Pass TDs", pass_3039_tds = "30-39 Pass TDs",
+      pass_4049_tds = "40-49 Pass TDs", pass_50_tds = "50+ Pass TDs", pass_int = "Int",
+      sacks = "Sck", pass_250_yds = ">= 250 yd", pass_300_yds = ">= 300 yd",
+      pass_350_yds = ">= 350 yd", pass_400_yds =  ">= 400 yd", rush_att = "Rush",
+      rush_yds = "Rush Yds", rush_tds = "Rush TDs", rush_09_tds = "0-9 Rsh TDs",
+      rush_1019_tds = "10-19 Rsh TDs", rush_2029_tds = "20-29 Rsh TDs",
+      rush_3039_tds = "30-39 Rsh TDs", rush_4049_tds = "40-49 Rsh TDs",
+      rush_50_tds = "50+ Rsh TDs", rxx_50_yds = ">= 50 yd", rxx_100_yds = ">= 100 yd",
+      rxx_150_yds = ">= 150 yd", rxx_200_yds = ">= 200 yd", rec_tgt = "Tgt",
+      rec_rz_tgt = "RZTgt", rec = "Rec", rec_yds = "Rec Yds", rec_tds = "Rec TDs",
+      rec_09_tds = "0-9 Rec TDs", rec_1019_tds = "10-19 Rec TDs",
+      rec_2029_tds = "20-29 Rec TDs", rec_3039_tds = "30-39 Rec TDs",
+      rec_4049_tds = "40-49 Rec TDs", rec_50_tds = "50+ Rec TDs",
+      rec_50_yds = ">= 50 yd1", rec_100_yds = ">= 100 yd1", punt_ret_yds = "Punt Ret Yds",
+      kick_ret_yds = "Kick Ret Yds",fumbles_lost = "Fum",  xp = "XPM", xp_att = "XPA",
+      fg = "FGM", fg_att = "FGA", fg_0019 = "10-19 FGM", fg_2029 = "20-29 FGM",
+      fg_3039 = "30-39 FGM", fg_4049 = "40-49 FGM", fg_50 = "50+ FGM", fg_miss = "Miss",
+      dst_yds_allowed = "Yds Allowed", dst_yds_99 = "0-99", dst_yds_199 = "100-199",
+      dst_yds_299 = "200-299", dst_yds_349 = "300-349", dst_yds_399 = "350-399",
+      dst_yds_449 = "400-449", dst_yds_499 = "450-499", dst_yds_549 = "500-549",
+      dst_yds_550 = "550+", dst_pts_allowed = "Pts Agn", dst_pts_0 = "0",
+      dst_pts_6 = "1-6", dst_pts_13 = "7-13", dst_pts_17 = "14-17", dst_pts_20 = "18-20",
+      dst_pts_27 = "21-27", dst_pts_34 = "28-34", dst_pts_45 = "35-45", dst_pts_46 = "46+",
+      dst_sacks = "Scks", dst_int = "Int", dst_fum_rec = "Fum", dst_td = "DefTD",
+      dst_safety = "Safts", idp_solo = "Tack", idp_asst = "Asst", idp_sack = "Scks",
+      idp_pd = "PassDef", idp_int = "Int", idp_fum_force = "FumFrc", idp_fum_rec = "Fum",
+      idp_tds = "DefTD", site_pts = "Pts"
+    )
+  ),
   #### FFToday ####
   FFToday = list(
     base = "http://www.fftoday.com/rankings/",
@@ -580,60 +644,6 @@ xlsx_sites <- list(
       pass_yds = "PASS YDS", pass_tds = "PASS TD", pass_int = "INT",
       rush_yds = "RUSH YDS" , reg_tds = "REG TD", fg_0039 = "FG 1-39",
       fg_4049 = "FG 40-49", fg_50 = "FG 50+", xp = "XP"
-    )
-  ),
-  #### FantasySharks ####
-  FantasySharks = list(
-    base = "https://www.fantasysharks.com/apps/bert/forecasts/projections.php?csv=1&",
-    get_query = function(season, week, pos_id, ...){
-      query <- list()
-      shark_segment <- function(season, week){
-        shark_season <- c("2017"= 586, "2018" = 618, "2019" = 650, "2020" = 682)
-        segment <- shark_season[as.character(season)] + week + 9 * (week > 0)
-        return(segment)
-      }
-      query[c("League", "scoring", "uid")] <- c(-1, 1, 4)
-      query$Segment <- shark_segment(season, week)
-      query$Position <- pos_id
-      return(query)
-    },
-    url_positions = function(p)switch(p, QB = 1, RB =2 , WR = 4, TE = 5, K = 7,
-                                      DST = 6, DL = 8, LB = 9, DB = 10),
-    min_week = 0,
-    max_week = 21,
-    season_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
-    week_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
-    id_col = "id",
-    stat_cols = c(
-      pass_att = "Att", pass_comp = "Comp", pass_yds = "Pass Yds", pass_tds = "Pass TDs",
-      pass_09_tds = "0-9 Pass TDs", pass_1019_tds = "10-19 Pass TDs",
-      pass_2029_tds = "20-29 Pass TDs", pass_3039_tds = "30-39 Pass TDs",
-      pass_4049_tds = "40-49 Pass TDs", pass_50_tds = "50+ Pass TDs", pass_int = "Int",
-      sacks = "Sck", pass_250_yds = ">= 250 yd", pass_300_yds = ">= 300 yd",
-      pass_350_yds = ">= 350 yd", pass_400_yds =  ">= 400 yd", rush_att = "Rush",
-      rush_yds = "Rush Yds", rush_tds = "Rush TDs", rush_09_tds = "0-9 Rsh TDs",
-      rush_1019_tds = "10-19 Rsh TDs", rush_2029_tds = "20-29 Rsh TDs",
-      rush_3039_tds = "30-39 Rsh TDs", rush_4049_tds = "40-49 Rsh TDs",
-      rush_50_tds = "50+ Rsh TDs", rxx_50_yds = ">= 50 yd", rxx_100_yds = ">= 100 yd",
-      rxx_150_yds = ">= 150 yd", rxx_200_yds = ">= 200 yd", rec_tgt = "Tgt",
-      rec_rz_tgt = "RZTgt", rec = "Rec", rec_yds = "Rec Yds", rec_tds = "Rec TDs",
-      rec_09_tds = "0-9 Rec TDs", rec_1019_tds = "10-19 Rec TDs",
-      rec_2029_tds = "20-29 Rec TDs", rec_3039_tds = "30-39 Rec TDs",
-      rec_4049_tds = "40-49 Rec TDs", rec_50_tds = "50+ Rec TDs",
-      rec_50_yds = ">= 50 yd1", rec_100_yds = ">= 100 yd1", punt_ret_yds = "Punt Ret Yds",
-      kick_ret_yds = "Kick Ret Yds",fumbles_lost = "Fum",  xp = "XPM", xp_att = "XPA",
-      fg = "FGM", fg_att = "FGA", fg_0019 = "10-19 FGM", fg_2029 = "20-29 FGM",
-      fg_3039 = "30-39 FGM", fg_4049 = "40-49 FGM", fg_50 = "50+ FGM", fg_miss = "Miss",
-      dst_yds_allowed = "Yds Allowed", dst_yds_99 = "0-99", dst_yds_199 = "100-199",
-      dst_yds_299 = "200-299", dst_yds_349 = "300-349", dst_yds_399 = "350-399",
-      dst_yds_449 = "400-449", dst_yds_499 = "450-499", dst_yds_549 = "500-549",
-      dst_yds_550 = "550+", dst_pts_allowed = "Pts Agn", dst_pts_0 = "0",
-      dst_pts_6 = "1-6", dst_pts_13 = "7-13", dst_pts_17 = "14-17", dst_pts_20 = "18-20",
-      dst_pts_27 = "21-27", dst_pts_34 = "28-34", dst_pts_45 = "35-45", dst_pts_46 = "46+",
-      dst_sacks = "Scks", dst_int = "Int", dst_fum_rec = "Fum", dst_td = "DefTD",
-      dst_safety = "Safts", idp_solo = "Tack", idp_asst = "Asst", idp_sack = "Scks",
-      idp_pd = "PassDef", idp_int = "Int", idp_fum_force = "FumFrc", idp_fum_rec = "Fum",
-      idp_tds = "DefTD", site_pts = "Pts"
     )
   )
 )
