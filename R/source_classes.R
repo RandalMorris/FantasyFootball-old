@@ -311,8 +311,8 @@ html_source <- R6::R6Class(
       table_data <- tibble()
 
       repeat{
-        #data_page <- read_html(src_session)
-        data_page <- read_html(curl(src_session, handle = curl::new_handle("useragent" = "Mozilla/5.0")))
+        url_n <- url(src_session, "rb") 
+        data_page <- read_html(url_n)
 
         if(length(rm_elem) > 0){
           map(rm_elem, html_nodes, x = data_page) %>% map(xml_remove)
