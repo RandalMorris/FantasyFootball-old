@@ -18,7 +18,7 @@ html_sites <- list(
     rm_elem = list("colgroup.TableBase-colGroup", "div.Tablebase-tooltip", "span.CellPlayerName--short"),
     extract_pid = function(p_node){
       #TableBase > div > div > table > tbody > tr:nth-child(1) > td:nth-child(1) >
-      p_node %>% html_nodes(xpath="//*[@id="TableBase"]/div/div/table/tbody/tr[1]/td[1]/span[2]/a") %>% html_attr("href") %>% str_extract("[0-9]{2,8}")},
+      p_node %>% html_nodes(xpath="//*[@id='TableBase']/div/div/table/tbody/tr[1]/td[1]/span[2]/a") %>% html_attr("href") %>% str_extract("[0-9]{2,8}")},
     split_cols = list(
       list(
         col = function(p)list(TRUE ~ "PLAYER"),
