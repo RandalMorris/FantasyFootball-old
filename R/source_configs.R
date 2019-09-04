@@ -585,7 +585,6 @@ xlsx_sites <- list(
   #### FantasySharks ####
   FantasySharks = list(
     base = "https://www.fantasysharks.com/apps/bert/forecasts/projections.php?csv=1&",
-    get_path = function(season, week, position)sprintf("fantasy%srankingsexcel.xlsx", as.character(season)),
     get_query = function(season, week, pos_id, ...){
       query <- list()
       shark_segment <- function(season, week){
@@ -605,7 +604,6 @@ xlsx_sites <- list(
     season_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
     week_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
     id_col = "id"
-    },
     stat_cols = c(
       pass_att = "Att", pass_comp = "Comp", pass_yds = "Pass Yds", pass_tds = "Pass TDs",
       pass_09_tds = "0-9 Pass TDs", pass_1019_tds = "10-19 Pass TDs",
