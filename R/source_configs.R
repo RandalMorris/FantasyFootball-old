@@ -16,14 +16,14 @@ html_sites <- list(
     table_css = "table.TableBase-table",
     pid_css = "table.TableBase-table a[href *= 'players']",
     rm_elem = list("colgroup.TableBase-colGroup", "div.Tablebase-tooltip", "span.CellPlayerName--short")
+    extract_pid = function(p_node){
+      p_node %>% html_attr(href="/fantasy/football/players") %>% str_extract("[0-9]{2,8}")},
     split_cols = list(
       list(
         col = function(p)list(TRUE ~ "PLAYER"),
         into = function(p)list(TRUE ~ c("player", "position", "team")),
         regex = function(p)list(TRUE ~ "([A-Za-z0-9'-. ]+)[\\s[:cntrl:]]+([A-Z]+)[\\s[:cntrl:]]+•\\s([A-Z]+$)")
       )),
-    extract_pid = function(p_node){
-      p_node %>% html_attr("href="/fantasy/football/players") %>% str_extract("[0-9]{2,8}")},
     stat_cols = c(
       pass_att = "Passing Att", pass_comp = "Passing Cmp", pass_yds = "Passing Yds",
       pass_tds = "Passing TD",  pass_int = "Passing INT", pass_comp_pct = "Passing CmpPct",
