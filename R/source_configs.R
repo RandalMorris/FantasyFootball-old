@@ -603,7 +603,7 @@ xlsx_sites <- list(
     max_week = 21,
     season_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
     week_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
-    id_col = "id"
+    id_col = "id",
     stat_cols = c(
       pass_att = "Att", pass_comp = "Comp", pass_yds = "Pass Yds", pass_tds = "Pass TDs",
       pass_09_tds = "0-9 Pass TDs", pass_1019_tds = "10-19 Pass TDs",
