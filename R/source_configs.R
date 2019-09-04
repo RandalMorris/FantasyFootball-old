@@ -17,7 +17,8 @@ html_sites <- list(
     pid_css = "table.TableBase-table a[href *= 'players']",
     rm_elem = list("div.Tablebase-shadow", "div.Tablebase-overflow", "colgroup.TableBase-colGroup", "div.Tablebase-tooltip", "span.CellPlayerName--short"),
     extract_pid = function(p_node){
-      p_node %>% html_nodes(p_node,"tbody > tr.Tablebase-bodytr > td.Tablebase-td") %>% html_attr("href") %>% str_extract("[0-9]{2,8}")},
+      
+      p_node %>% html_nodes(p_node,xpath='//*[@id="TableBase"]/div/div/table/tbody/tr[1]/td[1]') %>% html_attr("href") %>% str_extract("[0-9]{2,8}")},
     split_cols = list(
       list(
         col = function(p)list(TRUE ~ "PLAYER"),
