@@ -15,10 +15,9 @@ html_sites <- list(
     id_col = "cbs_id",
     table_css = "table.TableBase-table",
     pid_css = "table.TableBase-table a[href *= 'players']",
-    #rm_elem = list("colgroup", "div.Tablebase-tooltip", "span.CellPlayerName--short"),
-    rm_elem = list("colgroup", "span.CellPlayerName--short"),
+    rm_elem = list("colgroup.TableBase-colGroup", "div.Tablebase-tooltip", "span.CellPlayerName--short"),
     extract_pid = function(p_node){
-      p_node %>% html_attr("href *= 'players'") %>% str_extract("[0-9]{2,8}")},
+      p_node %>% html_attr("a[href *= 'players']") %>% str_extract("[0-9]{2,8}")},
     split_cols = list(
       list(
         col = function(p)list(TRUE ~ "Player"),
