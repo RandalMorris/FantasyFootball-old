@@ -227,7 +227,7 @@ html_sites <- list(
     week_pos = c("QB", "RB", "WR", "TE", "K", "DST", "DL", "LB", "DB"),
     id_col = "id",
     table_css = "#toolData",
-    pid_css = "td.playerLink",
+    pid_css = "td.playerLink a",
     rm_elem = list("tr.separator",
                    "#toolData tr[valign ='middle']:not(:first-child)",
                    "#toolData tr[height ='20px']"),
