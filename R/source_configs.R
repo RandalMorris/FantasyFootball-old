@@ -15,7 +15,7 @@ html_sites <- list(
     id_col = "cbs_id",
     table_css = "table.TableBase-table",
     pid_css = "table.TableBase-table a[href *= 'players']",
-    rm_elem = list("colgroup", "div.Tablebase-tooltip", "span.CellPlayerName--short"),
+    rm_elem = list("colgroup", "div.Tablebase-tooltip", "span.CellPlayerName--long"),
     extract_pid = function(p_node){
       p_node %>% html_attr("href") %>% str_extract("[0-9]{2,8}")},
     split_cols = list(
@@ -43,6 +43,7 @@ html_sites <- list(
       dst_pts_allowed_g = "PPG", dst_rush_yds_allowed = "Yards Allowed rush",
       dst_pass_yds_allowed = "Yards Allowed pass", dst_avg_yds_allowed = "Yards Allowed avg",
       site_pts = "FPTS", site_pts = "Misc FPTS", fppg = "Misc FPPG")
+    #print(extract_pid)
   ),
   #### ESPN ####
   ESPN = list(
