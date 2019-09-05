@@ -393,6 +393,7 @@ html_source <- R6::R6Class(
 
         if(!is.null(pid_css)){
           get_pid <- self$extract_pid
+          print(self$extract_pid)
           player_ids <- data_page %>% html_nodes(pid_css) %>% get_pid()
           if(length(player_ids) == nrow(data_table))
             data_table <- data_table %>% add_column(src_id = player_ids, .before = 1)
