@@ -488,7 +488,7 @@ html_source <- R6::R6Class(
         src_table <- src_table %>% rename_at(vars(matches("name$")), funs(rn_name(.)))
       }
       src_table <- src_table %>% self$set_id()
-      print(self$set_id())
+      print(self$set_id)
 
       return(src_table)
     }
