@@ -186,7 +186,7 @@ html_sites <- list(
     id_col = "fantasypro_id",
     table_css = "#data",
     pid_css = "a.player-name",
-    extract_pid = function(p_node){p_node %>% html_attr("href") %>% basename()}, # %>% str_replace("\\.php.*$", "")},
+    extract_pid = function(p_node){p_node %>% html_attr("href") %>% basename() %>% str_replace("\\.php.*$", "")},
     rm_elem = list("tr.ad-row"),
     split_cols = list(
       list(
