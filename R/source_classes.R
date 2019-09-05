@@ -174,7 +174,7 @@ projection_source <- R6::R6Class(
           else if("team" %in% names(data_tbl) && all(data_tbl$team %in% dst_data$team))
             data_tbl %>% add_column(id =   dst_data$id[match(data_tbl$team, dst_data$team)], .before = 1)
         } else {
-           data_tbl %>% add_column(id =  001, .before = 1)
+           data_tbl
         }
       }
     }
