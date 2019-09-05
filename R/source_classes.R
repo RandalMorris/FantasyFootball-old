@@ -394,7 +394,6 @@ html_source <- R6::R6Class(
         if(!is.null(pid_css)){
           get_pid <- self$extract_pid
           player_ids <- data_page %>% html_nodes(pid_css) %>% get_pid()
-          print(player_ids)
           if(length(player_ids) == nrow(data_table))
             data_table <- data_table %>% add_column(src_id = player_ids, .before = 1)
         } else {
@@ -403,7 +402,6 @@ html_source <- R6::R6Class(
             names(src_id_col) <- "src_id"
             data_table <- rename(data_table, !!!src_id_col) %>%
               mutate(src_id = as.character(src_id))
-            print(src_id)
           }
         }
 
