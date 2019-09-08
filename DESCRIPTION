@@ -1,7 +1,7 @@
 Package: FantasyFootball
 Type: Package
 Title: Scrape Data For Fantasy Football
-Version: 1.0.0.0000
+Version: 1.0.0.2000
 Authors@R: c(person("Randal", "Morris", email = "morrrand@gmail.com",
                   role = c("aut", "cre")))
 Author: Randal Morris
