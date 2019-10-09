@@ -87,6 +87,7 @@ get_sd <- function(pts, wt)invoke_map(sd_funcs, sd_args, x = pts, w = wt)
 #' Function to calculate the projected points for each source.
 #' @param data_result An output from the \link{scrape_data} function.
 #' @param scoring_rules The scoring rules to be used.
+#' @export
 source_points <- function(data_result, scoring_rules){
   scoring_tbl <- make_scoring_tbl(scoring_rules)
 
